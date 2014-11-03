@@ -1,0 +1,26 @@
+CREATE table food_facility(
+	id serial primary key,
+	location_id bigint,
+	applicant text,
+	facility_type char(50),
+	cnn bigint,
+	location_description text,
+	address	 char(100),
+	block_lot char(20),
+	block char(20),
+	lot  char(20),
+	permit char(20),
+	status char(20),
+	food_items text,
+	x double precision,
+	y double precision,
+	latitude double precision,
+	longitude double precision,
+	schedule text,
+	noi_sent timestamp without time zone,
+	approved timestamp without time zone,
+	received text,
+	prior_permit int,
+	expiration_date timestamp without time zone
+);
+
