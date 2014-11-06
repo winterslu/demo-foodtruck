@@ -58,16 +58,16 @@ public class FoodTruck extends BaseEntity<Long> implements Serializable {
 	private String food_items;
 
 	@Column(name = "x")
-	private double x;
+	private Double x;
 
 	@Column(name = "y")
-	private double y;
+	private Double y;
 
 	@Column(name = "latitude")
-	private double latitude;
+	private Double latitude;
 
 	@Column(name = "longitude")
-	private double longitude;
+	private Double longitude;
 
 	@Column(name = "schedule")
 	private String schedule;
@@ -183,35 +183,35 @@ public class FoodTruck extends BaseEntity<Long> implements Serializable {
 		this.food_items = food_items;
 	}
 
-	public double getX() {
+	public Double getX() {
 		return x;
 	}
 
-	public void setX(double x) {
+	public void setX(Double x) {
 		this.x = x;
 	}
 
-	public double getY() {
+	public Double getY() {
 		return y;
 	}
 
-	public void setY(double y) {
+	public void setY(Double y) {
 		this.y = y;
 	}
 
-	public double getLatitude() {
+	public Double getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(double latitude) {
+	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
 
-	public double getLongitude() {
+	public Double getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(double longitude) {
+	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
 
