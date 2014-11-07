@@ -31,7 +31,6 @@ body {
 }
 body {
     color: #fff;
-    text-align: center;
     text-shadow: 0 1px 3px rgba(0,0,0,.5);
 }
 
@@ -49,6 +48,7 @@ body {
     vertical-align: top;
 }
 .cover-container,
+.lead,
 .masthead{
     margin-right: auto;
     margin-left: auto;
@@ -111,7 +111,12 @@ body {
  */
 
 .cover {
-    padding: 76px 20px 0 20px;
+    padding: 150px 50px 20px 10px;
+}
+@media (min-width: 768px){
+    .cover {
+        padding: 76px 20px 20px 20px;
+    }
 }
 .cover .btn-lg {
     padding: 10px 20px;
@@ -151,7 +156,7 @@ body {
     .masthead,
     .mastfoot,
     .cover-container {
-        width: 100%; /* Must be percentage or pixels for horizontal alignment */
+        width: 90%; /* Must be percentage or pixels for horizontal alignment */
     }
 }
 
@@ -159,6 +164,59 @@ body {
     .masthead,
     .mastfoot,
     .cover-container {
-        width: 700px;
+        width: 900px;
     }
+}
+
+.nav-pills a:hover{
+    color: #333333;
+}
+.nav-pills>li{
+    float: none;
+    display: inline-block;
+}
+.cover-heading,
+.mastfoot,
+.lead,
+.nav {
+    text-align: center;
+}
+
+.media{
+    padding: 10px 10px 0 10px;
+
+    -moz-transition: all 0.05s ease-in;
+    -webkit-transition: all 0.05s ease-in;
+    -o-transition: all 0.05s ease-in;
+    transition: all 0.05s ease-in;
+    border-radius: 10px;
+}
+
+.media:hover{
+    background-color: #999999;
+    -moz-transition: all 0.05s ease-in;
+    -webkit-transition: all 0.05s ease-in;
+    -o-transition: all 0.05s ease-in;
+    transition: all 0.05s ease-in;
+    border-radius: 10px;
+}
+
+#map-canvas{
+    color: #000000;
+}
+
+.winters{
+    max-height: 300px;
+}
+
+.transheader{
+    background-color: transparent;
+    -moz-transition: background-color 0.2s ease-out;
+    -webkit-transition: background-color 0.2s ease-out;
+    -o-transition: background-color 0.2s ease-out;
+    transition: background-color 0.2s ease-out;
+}
+
+.headerbg{
+    background-color: rgba(51,51,51,0.8);
 }

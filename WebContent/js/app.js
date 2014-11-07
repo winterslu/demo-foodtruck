@@ -65,4 +65,8 @@ window.FT = window.FT || {};
         }
     );
 
+    $(document).scroll(function() {
+        $('#headerView').toggleClass('headerbg', $(this).scrollTop()>20);
+    })
+
 })(jQuery);

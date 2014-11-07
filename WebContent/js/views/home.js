@@ -32,7 +32,6 @@ window.FT = window.FT || {};
             this.foodTruckList.getRandom(function(){
                 self.listView = new FT.ListView({model: self.foodTruckList});
                 self.updateMap(self.foodTruckList.models);
-//                  $("#content-list").html(self.listView.el);
             });
             $('.nav-pills li').removeClass('active');
             $('#random').addClass('active');
@@ -47,7 +46,6 @@ window.FT = window.FT || {};
                 function(){
                     self.listView = new FT.ListView({model: self.foodTruckList});
                     self.updateMap(self.foodTruckList.models);
-//                  $("#content-list").html(self.listView.el);
             });
             $('.nav-pills li').removeClass('active');
             $('#range').addClass('active');
@@ -62,7 +60,6 @@ window.FT = window.FT || {};
                 function(){
                     self.listView = new FT.ListView({model: self.foodTruckList});
                     self.updateMap(self.foodTruckList.models);
-//                  $("#content-list").html(self.listView.el);
             });
             $('.nav-pills li').removeClass('active');
             $('#closest').addClass('active');
@@ -140,12 +137,23 @@ window.FT = window.FT || {};
                 this.rangeCircle.setMap(null);
             }
             if(this.maptype == this.MAP_TYPE.RANGE){
+                this.rangeOptions.center = this.currentPos;
                 this.rangeCircle = new google.maps.Circle(this.rangeOptions);
                 google.maps.event.addListener(this.rangeCircle, 'center_changed', function(){
                     self.foodTruckList.findInDistance(
                         self.rangeCircle.getCenter().lat(),
                         self.rangeCircle.getCenter().lng(),
                         self.rangeCircle.getRadius() / 1000 * 0.6213,
+                        function(){
+                            self.listView = new FT.ListView({model: self.foodTruckList});
+                            self.resetMarkers(self.foodTruckList.models);
+                        });
+                });
+                google.maps.event.addListener(this.rangeCircle, 'radius_changed', function(){
+                    self.foodTruckList.findInDistance(
+                        self.rangeCircle.getCenter().lat(),
+                        self.rangeCircle.getCenter().lng(),
+                            self.rangeCircle.getRadius() / 1000 * 0.6213,
                         function(){
                             self.listView = new FT.ListView({model: self.foodTruckList});
                             self.resetMarkers(self.foodTruckList.models);
@@ -161,6 +169,7 @@ window.FT = window.FT || {};
                     this.markers[i].setMap(null);
                 }
             this.markers = [];
+            var infoWindow = new google.maps.InfoWindow();
             for(var i=0; i<dataSets.length; i++){
                 var location =
                     new google.maps.LatLng(dataSets[i].get('latitude'), dataSets[i].get('longitude'));
@@ -174,26 +183,31 @@ window.FT = window.FT || {};
                     icon: icon
                 });
                 this.markers.push(marker);
-            }
-        },
 
-        rangeCircleChanged: function(event){
-            var self = this;
-            this.foodTruckList.findInDistance(
-                this.rangeCircle.getCenter().lat(),
-                this.rangeCircle.getCenter().lng(),
-                this.rangeCircle.getRadius(),
-                function(){
-                    self.listView = new FT.ListView({model: self.foodTruckList});
-                    self.resetMarkers(self.foodTruckList.models);
-            });
+                // Set marker info based on input dataSets
+                var self = this;
+                google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                    return function() {
+                        var dataSet = dataSets[i];
+                        infoWindow.setContent(
+                            "<dl><dt>" + dataSet.get('applicant') +
+                                "</dt><dd>" + dataSet.get('address') +
+                                "</dd></dl>");
+                        infoWindow.open(self.map, marker);
+                    }
+                })(marker, i));
+
+            }
+
+            // Update list content that shows all result.
+            $("#content-list").html(this.listView.el);
         },
 
 
         render: function(){
             $(this.el).html(this.template());
             this.activateMap();
-            this.initClosestSearch();
+            this.initRandomSearch();
             return this;
         }
 
