@@ -3,6 +3,7 @@
  */
 package com.foodtruck.rest.service;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Queue;
@@ -43,6 +44,13 @@ public class FoodTruckServiceImpl implements FoodTruckService {
 	@Override
 	public List<FoodTruck> get() {
 		return foodTruckDao.getAll();
+	}
+	
+	@Override
+	public List<FoodTruck> getRandom() {
+		List<FoodTruck> all = foodTruckDao.getAll();
+		Collections.shuffle(all);
+		return all.subList(0, 20);
 	}
 
 	@Override

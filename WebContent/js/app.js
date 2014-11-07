@@ -28,6 +28,19 @@ window.FT = window.FT || {};
             }
             $("#content").html(this.homeView.el);
             this.headerView.select('home');
+
+            // Initiate List
+            if(!this.ListView){
+                var self = this;
+                this.foodTruckList = new FT.FoodTruckCollection();
+                this.foodTruckList.findClosest(37.5219895, -122.2234742, 10,
+                    function(){
+                        self.listView = new FT.ListView({model: self.foodTruckList});
+                        $("#content-list").html(self.listView.el);
+                    }
+                );
+            }
+
         },
 
         newTruck: function(){
@@ -44,7 +57,7 @@ window.FT = window.FT || {};
 
     });
 
-    FT.templateLoader.load(["HeaderView", "FooterView", "HomeView", "DetailView", "AboutView"]
+    FT.templateLoader.load(["HeaderView", "FooterView", "HomeView", "DetailView", "AboutView", "ListView", "ListItemView"]
         , function(){
             app = new FT.Router();
             Backbone.history.start();

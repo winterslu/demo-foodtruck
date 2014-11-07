@@ -8,7 +8,6 @@ window.FT = window.FT || {};
 
         },
         initialize: function() {
-            this.render();
         },
 
         activateMap: function(){
@@ -34,6 +33,13 @@ window.FT = window.FT || {};
                     });
 
                     self.map.setCenter(pos);
+                    var beachMarker = new google.maps.Marker({
+                        position: new google.maps.LatLng(37.5219895, -122.2234742),
+                        map: self.map,
+                        icon: 'img/foodtruck_marker.png'
+                    });
+
+
                 }, function() {
                     self.handleNoGeolocation(true);
                 });
@@ -41,6 +47,9 @@ window.FT = window.FT || {};
                 // Browser doesn't support Geolocation
                 this.handleNoGeolocation(false);
             }
+        },
+
+        updateMap: function(){
 
         },
 
@@ -79,7 +88,26 @@ window.FT = window.FT || {};
         },
 
         render: function(){
+            var list = this.model.models;
+            var len = list.length;
 
+            $(this.el).html(this.template());
+            for(var i=0; i<len; i++){
+                $('#truckList', this.el).append(new FT.ListItemView({model: list[i]}).render().el);
+            }
+            return this;
+        }
+
+    });
+
+    FT.ListItemView = Backbone.View.extend({
+        initialize: function() {
+
+        },
+
+        render: function(){
+            $(this.el).html(this.template(this.model.toJSON()));
+            return this;
         }
 
     });

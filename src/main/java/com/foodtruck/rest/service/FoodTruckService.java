@@ -38,6 +38,11 @@ public interface FoodTruckService {
 	
 	
 	@GET
+	@Path("/random")
+	List<FoodTruck> getRandom();
+	
+	
+	@GET
 	@Path("/indistance")
 	List<FoodTruck> indistance(
 			@DefaultValue("37.5219895")		@QueryParam("lat") double latitude,
@@ -45,7 +50,7 @@ public interface FoodTruckService {
 			@DefaultValue("5")			@QueryParam("dist") double distance);
 	
 	@GET
-	@Path("/cloest")
+	@Path("/closest")
 	Queue<FoodTruck> cloest(
 			@DefaultValue("37.5219895")		@QueryParam("lat") double latitude,
 			@DefaultValue("-122.2234742")	@QueryParam("lng") double longitude,
