@@ -47,6 +47,7 @@ window.FT = window.FT || {};
                     self.listView = new FT.ListView({model: self.foodTruckList});
                     self.updateMap(self.foodTruckList.models);
             });
+            this.map.setCenter(this.currentPos);
             $('.nav-pills li').removeClass('active');
             $('#range').addClass('active');
         },
@@ -61,6 +62,7 @@ window.FT = window.FT || {};
                     self.listView = new FT.ListView({model: self.foodTruckList});
                     self.updateMap(self.foodTruckList.models);
             });
+            this.map.setCenter(this.currentPos);
             $('.nav-pills li').removeClass('active');
             $('#closest').addClass('active');
         },
