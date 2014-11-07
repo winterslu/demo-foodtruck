@@ -45,15 +45,15 @@ public interface FoodTruckService {
 	@GET
 	@Path("/indistance")
 	List<FoodTruck> indistance(
-			@DefaultValue("37.5219895")		@QueryParam("lat") double latitude,
-			@DefaultValue("-122.2234742")	@QueryParam("lng") double longitude,
+			@DefaultValue("37.7491426")		@QueryParam("lat") double latitude,
+			@DefaultValue("-122.4361673")	@QueryParam("lng") double longitude,
 			@DefaultValue("5")			@QueryParam("dist") double distance);
 	
 	@GET
 	@Path("/closest")
 	Queue<FoodTruck> cloest(
-			@DefaultValue("37.5219895")		@QueryParam("lat") double latitude,
-			@DefaultValue("-122.2234742")	@QueryParam("lng") double longitude,
+			@DefaultValue("37.7491426")		@QueryParam("lat") double latitude,
+			@DefaultValue("-122.4361673")	@QueryParam("lng") double longitude,
 			@DefaultValue("20")				@QueryParam("count") int count);
 	
 	

@@ -47,7 +47,20 @@ window.FT = window.FT || {};
             console.log("Random FoodTruck Collection initialized");
         },
 
-        findClosest: function(latitude, longitude, count, afterSuccess){
+        getRandom: function(successCallback){
+            var formedUrl = this.url + '/random';
+            var self = this;
+            $.ajax({
+                url: formedUrl,
+                dataType: "json",
+                success: function(data){
+                    self.reset(data);
+                    successCallback();
+                }
+            });
+        },
+
+        findClosest: function(latitude, longitude, count, successCallback){
             latitude = typeof latitude == 'number'? latitude : null;
             longitude = typeof longitude == 'number'? longitude : null;
             count = typeof count == 'number'? count : null;
@@ -59,12 +72,12 @@ window.FT = window.FT || {};
                 dataType: "json",
                 success: function(data){
                     self.reset(data);
-                    afterSuccess();
+                    successCallback();
                 }
             });
         },
 
-        findInDistance: function(latitude, longitude, dist){
+        findInDistance: function(latitude, longitude, dist, successCallback){
             latitude = typeof latitude == 'number'? latitude : null;
             longitude = typeof longitude == 'number'? longitude : null;
             dist = typeof dist == 'number'? dist : null;
@@ -76,6 +89,7 @@ window.FT = window.FT || {};
                 dataType: "json",
                 success: function(data){
                     self.reset(data);
+                    successCallback();
                 }
             });
         }
